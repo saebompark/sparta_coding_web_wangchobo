@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous">
+    </script>
+    <script>
+        function order_success(){
+            alert('주문이 완료되었습니다!')
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+                exchange_rate_update();
+        });
+        function exchange_rate_update(){
+        $.ajax({
+            type: "GET",
+            url: "http://spartacodingclub.shop/sparta_api/rate",
+            data: {},
+            success: function (response) {
+                let exchange_rate = response['rate']
+                let temp_html =`<span>${exchange_rate}</span>`
+                $('#auto_exchange_rate').append(temp_html)
+                console.log(exchange_rate)
+            }
+        })
+        }
+
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
+
+    <style>
+        * {
+            font-family: 'Song Myung', serif;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .wine_image {
+            width: 100px;
+            margin: 30px auto 30px auto;
+            display: block;
+        }
+
+        .wine_name {
+            font-size: 20px;
+            margin: 0 15px 0 0;
+        }
+
+        .wine_price {
+            font-size: 15px;
+        }
+
+        .wine_desc {
+            font-size: 12px;
+        }
+
+        .order_list {
+            font-size: 20px;
+            margin-top : 10px;
+        }
+        .order_button {
+            width : 200px;
+            margin : 10px auto;
+        }
+        .select_amount{
+            width : 438px;
+            font-size : 15px;
+            color : gray;
+            border : solid;
+            border-color : gray;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>
+            <img class="wine_image" src="https://images.vivino.com/thumbs/0nET3qrdRJWh66liEogTSQ_pb_x960.png">
+        </div>
+        <div id="auto_exchange_rate">
+            <span class="wine_name">이기갈 샤또네프뒤파프</span>
+            <span class="wine_price">가격 : 100,000원/병</span>
+            <span> 환율 : </span>
+        </div>
+        <div>
+            <span class="wine_desc">프랑스 남부 론 지역의 와인으로, 그르나슈, 무르베드르, 시라 등의 포도 품종으로 만든다. 신의 물방울 11권에 나오는 와인으로, 바베큐 요리 및 치즈와 잘 어울린다.</span>
+        </div>
+        <div class="order_list">
+            <p>주문 내역</p>
+            <div class="form-inline">
+                <div class="input-group mb-2 mr-sm-2" style="width:500px">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">주문자 이름</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="ex. 홍길동">
+                </div>
+                <div class="input-group mb-2 mr-sm-2" style="width:500px">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">수량</div>
+                    </div>
+                    <div class="btn-group">
+                    <button type="button" class="dropdown-toggle select_amount" data-toggle="dropdown">
+                        수량을 선택해주세요.
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" type="button">1</button>
+                        <button class="dropdown-item" type="button">2</button>
+                        <button class="dropdown-item" type="button">3</button>
+                    </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2 mr-sm-2" style="width:500px">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">주소</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <div class="input-group mb-2 mr-sm-2" style="width : 500px">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">전화번호</div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+
+            </div>
+            <div class="order_button">
+                <button type="submit" class="btn btn-primary mb-2" onclick="order_success()">주문하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
